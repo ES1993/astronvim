@@ -39,14 +39,21 @@ return {
 
       leap.add_default_mappings()
     end,
-  }, {
-  "ggandor/flit.nvim",
-  event = "User AstroFile",
-  opts = {
-    keys = { f = "f", F = "F", t = "t", T = "T" },
-    labeled_modes = "v",
-    multiline = true,
-    opts = {},
   },
-},
+  {
+    "ggandor/flit.nvim",
+    event = "User AstroFile",
+    opts = {
+      keys = { f = "f", F = "F", t = "t", T = "T" },
+      labeled_modes = "v",
+      multiline = true,
+      opts = {},
+    },
+  },
+  {
+    "vimwiki/vimwiki",
+    keys = {
+      { "<leader>ww", desc = "index" }
+    }
+  }
 }
