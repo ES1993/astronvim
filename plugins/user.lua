@@ -1,20 +1,52 @@
 return {
-  -- You can also add new plugins here as well:
-  -- Add plugins, the lazy syntax
-  -- "andweeb/presence.nvim",
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("lsp_signature").setup()
-  --   end,
-  -- },
   {
     "ggandor/leap.nvim",
     dependencies = { "tpope/vim-repeat" },
+    event = "User AstroFile",
+    keys = {
+      {
+        "gs",
+        function()
+          local focusable_windows_on_tabpage = vim.tbl_filter(function(win)
+            return vim.api.nvim_win_get_config(win).focusable
+          end, vim.api.nvim_tabpage_list_wins(0))
+
+          require("leap").leap({ target_windows = focusable_windows_on_tabpage })
+        end,
+        desc = "leap all window"
+      }
+    },
     config = function()
-      require("leap").add_default_mappings()
+      local leap = require("leap")
+
+      vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+      vim.api.nvim_set_hl(0, "LeapMatch", {
+        fg = "white",
+        bold = true,
+        nocombine = true,
+      })
+      vim.api.nvim_set_hl(0, "LeapLabelPrimary", {
+        fg = "red",
+        bold = true,
+        nocombine = true,
+      })
+      vim.api.nvim_set_hl(0, "LeapLabelSecondary", {
+        fg = "blue",
+        bold = true,
+        nocombine = true,
+      })
+      leap.opts.highlight_unlabeled_phase_one_targets = true
+
+      leap.add_default_mappings()
     end,
-    event = "User AstroFile"
-  }
+  }, {
+  "ggandor/flit.nvim",
+  event = "User AstroFile",
+  opts = {
+    keys = { f = "f", F = "F", t = "t", T = "T" },
+    labeled_modes = "v",
+    multiline = true,
+    opts = {},
+  },
+},
 }
