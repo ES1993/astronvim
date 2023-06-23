@@ -27,7 +27,6 @@ return {
     ["<C-a>"] = { "gg<S-v>G", desc = "Select all" },
     ["<leader>s"] = { "<cmd>w<cr>", desc = "Save" },
     ["<leader>w"] = { function() end, desc = "Wiki" }
-
   },
   t = {
     -- setting a mapping to false will disable it
